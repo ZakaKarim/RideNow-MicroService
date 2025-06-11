@@ -2,6 +2,7 @@ const Captain = require("../models/captain.model")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const BlacklistToken = require("../models/blacklistToken.model")
+const { subscribeToQueue } = require('../service/rabbit')
 
 
 module.exports.register = async(req,res)=>{
@@ -95,3 +96,6 @@ module.exports.toggleAvailability = async (req, res) => {
     }
 }
 
+subscribeToQueue("new-ride", (data) => {
+    console.log(JSON.parse(data));
+})

@@ -5,6 +5,10 @@ const app = express();
 const userRoutes = require("./routes/user.route")
 const cookieParser = require('cookie-parser')
 const connect = require('./db/db')
+const rabbitMq = require("./service/rabbit")
+
+
+rabbitMq.connect();
 
 connect();
 
